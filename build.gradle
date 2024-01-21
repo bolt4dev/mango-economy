@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'net.mangoland.economy'
+version = '1.0-SNAPSHOT'
+compileJava.options.encoding = 'UTF-8'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven{ url 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+
+dependencies {
+    // PAPER
+    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+
+    implementation "org.hibernate.orm:hibernate-core:6.2.7.Final"
+    implementation "mysql:mysql-connector-java:5.0.8"
+
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
+
+    implementation 'com.github.hakan-krgn.hCore:hCore-bukkit:0.7.3.3'
+    annotationProcessor 'com.github.hakan-krgn.hCore:hCore-bukkit:0.7.3.3'
+
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-core:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-config:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-command:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-listener:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-scheduler:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-database-native:0.1.5.0'
+    implementation 'com.github.hakan-krgn.spigot-injection:injection-database-hibernate:0.1.5.0'
+}
+
+artifacts.archives(tasks.shadowJar)
+tasks.jar {
+    enabled = true
+}
+
+tasks.shadowJar {
+    archiveFileName.set("${project.name}-${project.version}.jar")
+}
