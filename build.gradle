@@ -23,9 +23,10 @@ dependencies {
     // PAPER
     compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
 
-    implementation "org.hibernate.orm:hibernate-core:6.2.7.Final"
-    implementation "mysql:mysql-connector-java:5.0.8"
-
+    implementation "org.hibernate.orm:hibernate-core:6.4.2.Final"
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    implementation 'com.h2database:h2:2.2.220'
+    implementation "org.hibernate.orm:hibernate-community-dialects:6.4.2.Final"
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
 
     implementation 'com.github.hakan-krgn.hCore:hCore-bukkit:0.7.3.3'
