@@ -1,0 +1,45 @@
+settings:
+  database: # database to save player data
+    save-method: MYSQL # MYSQL
+    name: 'economy'
+    auth: # database's auth info. only required if save-method is mysql
+      url: 'jdbc:mysql://localhost:3306/economy?createDatabaseIfNotExist=true'
+      port: 3306
+      username: 'root'
+      password: '123456'
+  logging: # logs all transactions
+    enabled: true # true, false
+    type: TXT # MYSQL, JSON, TXT
+    format: "%s sent %a %c to %t" # %s - sender, %a - amount, %c - currency, %t - target
+  bal-top: # balance-top update settings
+    interval: 60
+
+currencies:
+  default:
+    singular-name: 'dollar'
+    plural-name: 'dollars'
+    separator: '.'
+    display-format: '%balance% %currencyname%'
+    max-amount: 10000000000000000
+    initial-amount: 5000
+    transactions: true
+    tax:
+      all: 0
+      transactions: 10
+    format-balance:
+      1000: 'k'
+      1000000: 'm'
+  token:
+    singular-name: 'token'
+    plural-name: 'tokens'
+    separator: '.'
+    display-format: '%balance% %currencyname%'
+    max-amount: 10000000000000000
+    initial-amount: 0
+    transactions: false
+    tax:
+      all: 0
+      transactions: 0
+    format-balance:
+      1000: 'k'
+      1000000: 'm'

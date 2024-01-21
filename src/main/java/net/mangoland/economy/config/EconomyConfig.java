@@ -13,20 +13,28 @@ public interface EconomyConfig extends BaseConfiguration {
     // CURRENCY
     @ConfigValue("currency.singular-name")
     String currencySingularName();
+
     @ConfigValue("currency.plural-name")
     String currencyPluralName();
+
     @ConfigValue("currency.separator")
     String currencySeparator();
+
     @ConfigValue("currency.display-format")
     String currencyDisplayFormat();
+
     @ConfigValue("currency.max-amount")
     double currencyMaxAmount();
+
     @ConfigValue("currency.initial-amount")
     double currencyInitialAmount();
+
     @ConfigValue("currency.transactions")
     boolean currencyTransactions();
+
     @ConfigValue("currency.tax.all")
     double taxAll();
+
     @ConfigValue("currency.tax.transactions")
     double taxTransactions();
 
@@ -43,6 +51,8 @@ public interface EconomyConfig extends BaseConfiguration {
     @ConfigValue("settings.logging.format")
     String logFormat();
 
+
+
     // DATABASE
     @ConfigValue("settings.database.name")
     String databaseName();
@@ -58,5 +68,4 @@ public interface EconomyConfig extends BaseConfiguration {
 
     @ConfigValue("settings.database.auth.password")
     String databasePassword();
-
 }

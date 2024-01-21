@@ -8,9 +8,9 @@ import com.hakan.spinjection.module.PluginModule;
 import net.mangoland.economy.config.EconomyConfig;
 
 public class RepositoryModule extends PluginModule {
+
     @Provide
     public DbCredential dbCredential(EconomyConfig config) {
-        System.out.println("a1");
         return DbCredential.of(
                 config.databaseUrl(),
                 "",
@@ -21,7 +21,6 @@ public class RepositoryModule extends PluginModule {
 
     @Provide
     public DbProperties dbProperties(EconomyConfig config) {
-        System.out.println("a2");
         DbProperties properties = new DbProperties();
         properties.set("hibernate.hbm2ddl.auto", "update");
         properties.set("hibernate.connection.autocommit", "true");
@@ -46,8 +45,4 @@ public class RepositoryModule extends PluginModule {
 
         return properties;
     }
-
-
-
-
 }
