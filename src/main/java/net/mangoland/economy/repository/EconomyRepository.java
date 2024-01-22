@@ -5,6 +5,4 @@ import com.hakan.spinjection.database.repositories.JpaRepository;
 import net.mangoland.economy.model.user.EconomyUser;
 
 @Repository
-public interface EconomyRepository extends JpaRepository<Integer, EconomyUser> {
-
-}
+public interface EconomyRepository extends JpaRepository<Integer, EconomyUser> { }
