@@ -54,12 +54,6 @@ public interface EconomyConfig extends BaseConfiguration {
 
 
     // DATABASE
-    @ConfigValue("settings.database.name")
-    String databaseName();
-
-    @ConfigValue("settings.database.auth.port")
-    String databasePort();
-
     @ConfigValue("settings.database.auth.url")
     String databaseUrl();
 

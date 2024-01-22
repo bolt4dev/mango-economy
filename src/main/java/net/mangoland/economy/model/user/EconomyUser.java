@@ -1,13 +1,9 @@
 package net.mangoland.economy.model.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import net.mangoland.economy.model.transaction.EconomyTransaction;
 
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "economy_users")
@@ -26,6 +22,7 @@ public class EconomyUser {
 
     @Column(name = "balance", nullable = false)
     private double balance;
+
 
 
     public EconomyUser() {
@@ -68,4 +65,5 @@ public class EconomyUser {
     public void transact(EconomyUser target, double amount) {
 
     }
+
 }

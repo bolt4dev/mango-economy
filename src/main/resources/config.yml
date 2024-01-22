@@ -1,12 +1,9 @@
 settings:
   database: # database to save player data
-    save-method: MYSQL # MYSQL
-    name: 'economy'
     auth: # database's auth info. only required if save-method is mysql
       url: 'jdbc:mysql://localhost:3306/economy?createDatabaseIfNotExist=true'
-      port: 3306
       username: 'root'
-      password: '123456'
+      password: ''
   logging: # logs all transactions
     enabled: true # true, false
     type: TXT # MYSQL, JSON, TXT
