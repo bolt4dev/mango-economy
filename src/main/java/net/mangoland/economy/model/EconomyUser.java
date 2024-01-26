@@ -71,20 +71,15 @@ public class EconomyUser {
 
 
     // HANDLERS
-
     public boolean hasEnoughMoney(double amount) {
-        double a = Math.abs(amount);
-        return balance >= a;
+        return this.balance >= Math.abs(amount);
     }
 
     public void increaseBalance(double amount) {
-        double a = Math.abs(amount);
-        balance = balance + a;
+        this.balance += Math.abs(amount);
     }
 
     public void decreaseBalance(double amount) {
-        double a = Math.abs(amount);
-        balance = balance - a >= 0 ? balance - a : 0;
+        this.balance = Math.max(this.balance - Math.abs(amount), 0);
     }
-
 }
