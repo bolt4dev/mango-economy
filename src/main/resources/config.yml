@@ -21,7 +21,4 @@ currency:
   tax:
     all: 0
     transactions: 10
-  format-balance:
-    1000: 'k'
-    1000000: 'm'
 

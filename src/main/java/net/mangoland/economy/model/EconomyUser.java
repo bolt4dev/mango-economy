@@ -66,7 +66,7 @@ public class EconomyUser {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance <= 0 ? 0 : balance;
+        this.balance = Math.max(balance, 0);
     }
 
 
