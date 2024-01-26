@@ -8,9 +8,8 @@ import com.hakan.spinjection.command.annotations.Executor;
 import com.hakan.spinjection.command.annotations.Subcommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Formatter;
-import net.mangoland.economy.config.EconomyConfig;
 import net.mangoland.economy.config.EconomyLang;
-import net.mangoland.economy.model.user.EconomyUser;
+import net.mangoland.economy.model.EconomyUser;
 import net.mangoland.economy.service.EconomyService;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,8 +21,9 @@ import org.bukkit.entity.Player;
         usage = "/balance [player]"
 )
 public class BalanceCommand {
-    private final EconomyService service;
+
     private final EconomyLang lang;
+    private final EconomyService service;
 
     @Autowired
     public BalanceCommand(EconomyService service,
@@ -31,6 +31,7 @@ public class BalanceCommand {
         this.service = service;
         this.lang = lang;
     }
+
 
     @Subcommand
     public void balance(@Executor Player executor) {
@@ -40,9 +41,10 @@ public class BalanceCommand {
         ));
     }
 
-    @Subcommand()
+
+    @Subcommand
     public void balance(@Executor CommandSender executor,
-                       @CommandParam Player target) {
+                        @CommandParam Player target) {
         EconomyUser user = this.service.getByUID(target.getUniqueId());
         executor.sendMessage(MiniMessage.miniMessage().deserialize(lang.balanceMessageAnother(),
                 Formatter.number("amount", user.getBalance())

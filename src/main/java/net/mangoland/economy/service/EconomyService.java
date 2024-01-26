@@ -4,7 +4,7 @@ import com.hakan.basicdi.annotations.Autowired;
 import com.hakan.basicdi.annotations.Service;
 import net.mangoland.economy.cache.EconomyCache;
 import net.mangoland.economy.config.EconomyConfig;
-import net.mangoland.economy.model.user.EconomyUser;
+import net.mangoland.economy.model.EconomyUser;
 import net.mangoland.economy.repository.EconomyRepository;
 import org.bukkit.entity.Player;
 
@@ -13,54 +13,57 @@ import java.util.UUID;
 
 @Service
 public class EconomyService {
-    private final EconomyRepository repository;
+
     private final EconomyCache cache;
     private final EconomyConfig config;
+    private final EconomyRepository repository;
 
     @Autowired
-    public EconomyService(EconomyRepository repository,
-                          EconomyCache cache,
-                          EconomyConfig config) {
-        this.repository = repository;
+    public EconomyService(EconomyCache cache,
+                          EconomyConfig config,
+                          EconomyRepository repository) {
         this.cache = cache;
         this.config = config;
+        this.repository = repository;
     }
 
     public EconomyUser getByID(Integer id) {
         return this.cache.getByID(id);
     }
+
     public EconomyUser getByUID(UUID uid) {
         return this.cache.getByUID(uid);
     }
 
 
+    public Optional<EconomyUser> findByID(Integer id) {
+        return this.cache.findByID(id);
+    }
+
     public Optional<EconomyUser> findByUID(UUID uid) {
         return this.cache.findByUID(uid);
     }
-    public boolean existByUID(UUID uid) {
-        return this.cache.existByUID(uid);
-    }
+
 
     public boolean existByID(Integer id) {
         return this.cache.existByID(id);
     }
 
-    public void add(EconomyUser user) {
+    public boolean existByUID(UUID uid) {
+        return this.cache.existByUID(uid);
+    }
+
+
+    public void load(Player player) {
+        EconomyUser user = this.repository.findByUID(player.getUniqueId()) != null ?
+                this.repository.findByUID(player.getUniqueId()) :
+                new EconomyUser(player, this.config.currencyInitialAmount());
         this.cache.add(user);
     }
 
-    public void remove(EconomyUser user) {
-        this.cache.remove(user);
-    }
-
-    public void load(Player player) {
-        EconomyUser user = repository.findByUID(player.getUniqueId()) != null ? repository.findByUID(player.getUniqueId()) : new EconomyUser(player.getUniqueId(), player.getName(), config.currencyInitialAmount());
-        add(user);
-    }
-
     public void save(Player player) {
-        EconomyUser user = getByUID(player.getUniqueId());
+        EconomyUser user = this.getByUID(player.getUniqueId());
+        this.cache.remove(user);
         this.repository.save(user);
-        remove(user);
     }
 }

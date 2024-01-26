@@ -4,11 +4,7 @@ import com.hakan.core.HCore;
 import com.hakan.core.plugin.Plugin;
 import com.hakan.spinjection.SpigotBootstrap;
 import com.hakan.spinjection.annotations.Scanner;
-import net.mangoland.economy.model.transaction.EconomyTransaction;
-import net.mangoland.economy.model.user.EconomyUser;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.UUID;
 
 @Plugin(
         name = "MangoEconomy",

@@ -1,9 +1,14 @@
 package net.mangoland.economy.cache;
 
 import com.hakan.basicdi.annotations.Component;
-import net.mangoland.economy.model.user.EconomyUser;
+import net.mangoland.economy.model.EconomyUser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class EconomyCache {
@@ -11,43 +16,44 @@ public class EconomyCache {
     private final Map<UUID, EconomyUser> users = new HashMap<>();
 
     public Map<UUID, EconomyUser> getContentSafe() {
-        return new HashMap<>(users);
+        return new HashMap<>(this.users);
     }
 
     public Map<UUID, EconomyUser> getContent() {
-        return users;
+        return this.users;
     }
 
     public Collection<EconomyUser> getValuesSafe() {
-        return new ArrayList<>(users.values());
+        return new ArrayList<>(this.users.values());
     }
 
     public Collection<EconomyUser> getValues() {
-        return users.values();
+        return this.users.values();
     }
 
-    public Optional<EconomyUser> findByUID(UUID uid) {
-        return Optional.ofNullable(users.get(uid));
-    }
 
-    public EconomyUser getByID(Integer id) {
-        return findByID(id).orElseThrow(() -> new NullPointerException("there is no economy data with (" + id + ")"));
-    }
-
-    public Optional<EconomyUser> findByID(Integer id) {
-        return Optional.of(users.values().stream().filter(user -> user.getId().equals(id)).findFirst().get());
-    }
-
-    public EconomyUser getByUID(UUID uid) {
-        return findByUID(uid).orElseThrow(() -> new NullPointerException("there is no economy data with (" + uid + ")"));
+    public boolean existByID(Integer id) {
+        return this.users.values().stream().anyMatch(user -> user.getId().equals(id));
     }
 
     public boolean existByUID(UUID uid) {
-        return users.containsKey(uid);
+        return this.users.containsKey(uid);
     }
 
-    public boolean existByID(Integer id) {
-        return users.values().stream().anyMatch(user -> user.getId().equals(id));
+    public EconomyUser getByID(Integer id) {
+        return this.findByID(id).orElseThrow(() -> new NullPointerException("there is no economy data with (" + id + ")"));
+    }
+
+    public EconomyUser getByUID(UUID uid) {
+        return this.findByUID(uid).orElseThrow(() -> new NullPointerException("there is no economy data with (" + uid + ")"));
+    }
+
+    public Optional<EconomyUser> findByID(Integer id) {
+        return this.users.values().stream().filter(user -> user.getId().equals(id)).findFirst();
+    }
+
+    public Optional<EconomyUser> findByUID(UUID uid) {
+        return Optional.ofNullable(this.users.get(uid));
     }
 
     public void add(EconomyUser user) {

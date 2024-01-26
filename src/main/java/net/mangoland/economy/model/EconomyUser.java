@@ -1,9 +1,14 @@
-package net.mangoland.economy.model.user;
+package net.mangoland.economy.model;
 
-import jakarta.persistence.*;
-import net.mangoland.economy.model.transaction.EconomyTransaction;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "economy_users")
@@ -27,6 +32,10 @@ public class EconomyUser {
 
     public EconomyUser() {
 
+    }
+
+    public EconomyUser(Player player, double balance) {
+        this(player.getUniqueId(), player.getName(), balance);
     }
 
     public EconomyUser(UUID uid, String name, double balance) {
@@ -57,7 +66,7 @@ public class EconomyUser {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance<=0 ? 0 : balance;
+        this.balance = balance <= 0 ? 0 : balance;
     }
 
 
@@ -65,17 +74,17 @@ public class EconomyUser {
 
     public boolean hasEnoughMoney(double amount) {
         double a = Math.abs(amount);
-        return balance>=a;
+        return balance >= a;
     }
 
     public void increaseBalance(double amount) {
         double a = Math.abs(amount);
-        balance = balance+a;
+        balance = balance + a;
     }
 
     public void decreaseBalance(double amount) {
         double a = Math.abs(amount);
-        balance = balance-a >= 0 ? balance-a : 0;
+        balance = balance - a >= 0 ? balance - a : 0;
     }
 
 }

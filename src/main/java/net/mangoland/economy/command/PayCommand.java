@@ -9,7 +9,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Formatter;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.mangoland.economy.config.EconomyLang;
-import net.mangoland.economy.model.user.EconomyUser;
+import net.mangoland.economy.model.EconomyUser;
 import net.mangoland.economy.service.EconomyService;
 import org.bukkit.entity.Player;
 
@@ -20,23 +20,22 @@ import org.bukkit.entity.Player;
         usage = "/pay <target> <amount>"
 )
 public class PayCommand {
+
     private final EconomyService service;
     private final EconomyLang lang;
 
     @Autowired
-    public PayCommand(EconomyService service,
-                          EconomyLang lang) {
+    public PayCommand(EconomyLang lang,
+                      EconomyService service) {
         this.service = service;
         this.lang = lang;
     }
-
 
 
     @Subcommand
     public void pay(@Executor Player executor,
                     @CommandParam Player target,
                     @CommandParam double amount) {
-
         EconomyUser user = this.service.getByUID(executor.getUniqueId());
         EconomyUser targetUser = this.service.getByUID(target.getUniqueId());
         double correctAmount = Math.abs(amount);

@@ -10,7 +10,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Formatter;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.mangoland.economy.config.EconomyConfig;
 import net.mangoland.economy.config.EconomyLang;
-import net.mangoland.economy.model.user.EconomyUser;
+import net.mangoland.economy.model.EconomyUser;
 import net.mangoland.economy.service.EconomyService;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -23,19 +23,18 @@ import org.bukkit.entity.Player;
 )
 public class EconomyCommand {
 
-    private final EconomyService service;
     private final EconomyLang lang;
     private final EconomyConfig config;
+    private final EconomyService service;
 
     @Autowired
-    public EconomyCommand(EconomyService service,
-                          EconomyLang lang,
-                          EconomyConfig config) {
-        this.service = service;
+    public EconomyCommand(EconomyLang lang,
+                          EconomyConfig config,
+                          EconomyService service) {
         this.lang = lang;
         this.config = config;
+        this.service = service;
     }
-
 
 
     @Subcommand(
@@ -58,15 +57,14 @@ public class EconomyCommand {
     }
 
 
-
     @Subcommand(
             permission = "economy.set",
             permissionMessage = "§cYou don't have permission to use this command."
     )
     public void set(@Executor CommandSender executor,
                     @CommandParam("set") String arg,
-                        @CommandParam Player target,
-                        @CommandParam double amount) {
+                    @CommandParam Player target,
+                    @CommandParam double amount) {
         EconomyUser user = this.service.getByUID(target.getUniqueId());
         user.setBalance(amount);
         executor.sendMessage(MiniMessage.miniMessage().deserialize(lang.adminSetBalance(),
@@ -81,9 +79,9 @@ public class EconomyCommand {
             permissionMessage = "§cYou don't have permission to use this command."
     )
     public void give(@Executor CommandSender executor,
-                    @CommandParam("give") String arg,
-                    @CommandParam Player target,
-                    @CommandParam double amount) {
+                     @CommandParam("give") String arg,
+                     @CommandParam Player target,
+                     @CommandParam double amount) {
         EconomyUser user = this.service.getByUID(target.getUniqueId());
         user.increaseBalance(amount);
         executor.sendMessage(MiniMessage.miniMessage().deserialize(lang.adminGiveBalance(),
@@ -93,15 +91,14 @@ public class EconomyCommand {
     }
 
 
-
     @Subcommand(
             permission = "economy.remove",
             permissionMessage = "§cYou don't have permission to use this command."
     )
     public void remove(@Executor CommandSender executor,
                        @CommandParam("remove") String arg,
-                     @CommandParam Player target,
-                     @CommandParam double amount) {
+                       @CommandParam Player target,
+                       @CommandParam double amount) {
         EconomyUser user = this.service.getByUID(target.getUniqueId());
         user.decreaseBalance(amount);
         executor.sendMessage(MiniMessage.miniMessage().deserialize(lang.adminRemoveBalance(),

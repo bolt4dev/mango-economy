@@ -19,8 +19,10 @@ public interface EconomyLang extends BaseConfiguration {
 
     @ConfigValue("transaction-success")
     String transactionSuccess();
+
     @ConfigValue("transaction-fail")
     String transactionFail();
+
     @ConfigValue("transaction-received")
     String transactionReceived();
 

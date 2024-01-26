@@ -12,7 +12,9 @@ import java.util.Objects;
 
 @Component
 public class PlayerConnectionListener {
+
     private final EconomyService service;
+
     @Autowired
     public PlayerConnectionListener(EconomyService service) {
         this.service = service;
@@ -21,20 +23,18 @@ public class PlayerConnectionListener {
     @EventListener
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (this.service.existByUID(player.getUniqueId())) {
-            if (!Objects.equals(this.service.getByUID(player.getUniqueId()).getName(), player.getName()))
-                this.service.getByUID(player.getUniqueId()).setName(player.getName());
-        } else {
+
+        if (!this.service.existByUID(player.getUniqueId())) {
             this.service.load(player);
+            return;
         }
+
+        if (!Objects.equals(this.service.getByUID(player.getUniqueId()).getName(), player.getName()))
+            this.service.getByUID(player.getUniqueId()).setName(player.getName());
     }
-
-
 
     @EventListener
     public void onQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        this.service.save(player);
+        this.service.save(event.getPlayer());
     }
-
 }
