@@ -23,14 +23,8 @@ public interface EconomyConfig extends BaseConfiguration {
     @ConfigValue("currency.display-format")
     String currencyDisplayFormat();
 
-    @ConfigValue("currency.max-amount")
-    double currencyMaxAmount();
-
     @ConfigValue("currency.initial-amount")
     double currencyInitialAmount();
-
-    @ConfigValue("currency.transactions")
-    boolean currencyTransactions();
 
     @ConfigValue("currency.tax.all")
     double taxAll();

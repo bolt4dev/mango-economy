@@ -15,9 +15,7 @@ currency:
   plural-name: 'dollars'
   separator: '.'
   display-format: '%balance% %currencyname%'
-  max-amount: 10000000000000000
   initial-amount: 5000.00
-  transactions: true
   tax:
     all: 0
     transactions: 10
