@@ -53,21 +53,10 @@ public class EconomyService {
         this.cache.remove(user);
     }
 
-    public EconomyUser load(Player player) {
-        for (EconomyUser user : this.repository.findAll()) {
-            if (user.getUid().equals(player.getUniqueId())) {
-                System.out.println(user.getBalance() + "founddddd");
-                add(user);
-                return user;
-            }
-        }
-        System.out.println("new player");
-        EconomyUser user = new EconomyUser(player.getUniqueId(), player.getName(), config.currencyInitialAmount());
+    public void load(Player player) {
+        EconomyUser user = repository.findByUID(player.getUniqueId()) != null ? repository.findByUID(player.getUniqueId()) : new EconomyUser(player.getUniqueId(), player.getName(), config.currencyInitialAmount());
         add(user);
-        return user;
     }
-
-
 
     public void save(Player player) {
         EconomyUser user = getByUID(player.getUniqueId());

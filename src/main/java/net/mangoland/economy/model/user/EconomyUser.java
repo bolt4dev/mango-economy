@@ -57,13 +57,25 @@ public class EconomyUser {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        this.balance = balance<=0 ? 0 : balance;
     }
 
 
     // HANDLERS
-    public void transact(EconomyUser target, double amount) {
 
+    public boolean hasEnoughMoney(double amount) {
+        double a = Math.abs(amount);
+        return balance>=a;
+    }
+
+    public void increaseBalance(double amount) {
+        double a = Math.abs(amount);
+        balance = balance+a;
+    }
+
+    public void decreaseBalance(double amount) {
+        double a = Math.abs(amount);
+        balance = balance-a >= 0 ? balance-a : 0;
     }
 
 }

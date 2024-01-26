@@ -26,7 +26,6 @@ public class PlayerConnectionListener {
                 this.service.getByUID(player.getUniqueId()).setName(player.getName());
         } else {
             this.service.load(player);
-            System.out.println("load player");
         }
     }
 

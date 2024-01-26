@@ -6,7 +6,6 @@ settings:
       password: ''
   logging: # logs all transactions
     enabled: true # true, false
-    type: TXT # MYSQL, JSON, TXT
     format: "%s sent %a %c to %t" # %s - sender, %a - amount, %c - currency, %t - target
   bal-top: # balance-top update settings
     interval: 60
@@ -17,7 +16,7 @@ currency:
   separator: '.'
   display-format: '%balance% %currencyname%'
   max-amount: 10000000000000000
-  initial-amount: 5000
+  initial-amount: 5000.00
   transactions: true
   tax:
     all: 0
