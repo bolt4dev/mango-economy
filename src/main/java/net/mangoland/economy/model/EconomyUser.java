@@ -75,11 +75,22 @@ public class EconomyUser {
         return this.balance >= Math.abs(amount);
     }
 
-    public void increaseBalance(double amount) {
+    public boolean increaseBalance(double amount) {
         this.balance += Math.abs(amount);
+        return true;
     }
 
-    public void decreaseBalance(double amount) {
+    public boolean decreaseBalance(double amount) {
         this.balance = Math.max(this.balance - Math.abs(amount), 0);
+        return true;
+    }
+
+    public boolean decreaseBalanceWithCheck(double amount) {
+        if(this.hasEnoughMoney(amount)) {
+            this.balance = this.balance - Math.abs(amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

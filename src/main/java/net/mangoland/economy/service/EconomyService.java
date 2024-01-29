@@ -53,6 +53,14 @@ public class EconomyService {
         return this.cache.existByUID(uid);
     }
 
+    public boolean hasAccount(Integer id) {
+        return this.repository.findById(id) != null;
+    }
+
+    public boolean hasAccount(UUID uid) {
+        return this.repository.findByUID(uid) != null;
+    }
+
 
     public void load(Player player) {
         EconomyUser user = this.repository.findByUID(player.getUniqueId()) != null ?
