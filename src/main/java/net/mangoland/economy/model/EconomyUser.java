@@ -86,11 +86,10 @@ public class EconomyUser {
     }
 
     public boolean decreaseBalanceWithCheck(double amount) {
-        if(this.hasEnoughMoney(amount)) {
-            this.balance = this.balance - Math.abs(amount);
-            return true;
-        } else {
+        if (!this.hasEnoughMoney(amount))
             return false;
-        }
+
+        this.balance -= Math.abs(amount);
+        return true;
     }
 }

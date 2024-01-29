@@ -16,6 +16,7 @@ import java.util.List;
 
 @Component
 public class VaultHook implements Economy {
+
     private final EconomyConfig config;
     private final EconomyService service;
 
@@ -25,6 +26,7 @@ public class VaultHook implements Economy {
         this.config = config;
         this.service = service;
     }
+
     @Override
     public boolean isEnabled() {
         return EconomyPlugin.getInstance().isEnabled();
@@ -67,7 +69,7 @@ public class VaultHook implements Economy {
 
     @Override
     public boolean has(OfflinePlayer player, double amount) {
-        return  service.getByUID(player.getUniqueId()).hasEnoughMoney(amount);
+        return service.getByUID(player.getUniqueId()).hasEnoughMoney(amount);
     }
 
     @Override
