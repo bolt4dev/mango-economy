@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
         name = "MangoEconomy",
         version = "1.0.0",
         apiVersion = "1.20",
-        authors = "graphxf"
+        authors = "bolt4dev"
 )
 @Scanner("net.mangoland.economy")
 public class EconomyPlugin extends JavaPlugin {
