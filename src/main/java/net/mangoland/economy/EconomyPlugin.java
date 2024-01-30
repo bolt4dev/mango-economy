@@ -19,7 +19,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 )
 @Scanner("net.mangoland.economy")
 public class EconomyPlugin extends JavaPlugin {
+
     private static EconomyPlugin instance;
+
     @Override
     public void onEnable() {
         instance = this;
