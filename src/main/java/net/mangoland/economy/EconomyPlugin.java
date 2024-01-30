@@ -31,7 +31,7 @@ public class EconomyPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("Disabling MangoEconomy.");
+        getLogger().info("Disabling MangoEconomy");
     }
 
     public static EconomyPlugin getInstance() {
